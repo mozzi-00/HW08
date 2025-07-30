@@ -12,5 +12,5 @@ ABigCoinItem::ABigCoinItem()
 void ABigCoinItem::ActiveItem(AActor* Activator)
 {
 	Super::ActiveItem(Activator);
-	DestroyItem();
+	
 }

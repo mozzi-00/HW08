@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "ItemSpawnRow.h"
 #include "SpawnVolume.generated.h"
 
 class UBoxComponent;
@@ -17,6 +18,10 @@ public:
 	// Sets default values for this actor's properties
 	ASpawnVolume();
 
+	UFUNCTION(BlueprintCallable, Category = "Spawning")
+	AActor* SpawnRandomItem();
+
+protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Spawning")
 	USceneComponent* Scene;
@@ -24,19 +29,15 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Spawning")
 	UBoxComponent* SpawningBox;
 
-	// 스폰 볼륨 내부에서 무작위 좌표를 얻어오는 함수
-	UFUNCTION(BlueprintCallable, Category = "Spawning")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Spawning")
+	UDataTable* ItemDataTable;
+
+
+
 	FVector GetRandomPointInVolume() const;
-	// 특정 아이템 클래스를 스폰하는 함수
-	UFUNCTION(BlueprintCallable, Category = "Spawning")
-	void SpawnItem(TSubclassOf<AActor> ItemClass);
+	FItemSpawnRow* GetRandomItem() const;
+	
+	AActor* SpawnItem(TSubclassOf<AActor> ItemClass);
 
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
 
 };

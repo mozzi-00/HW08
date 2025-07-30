@@ -11,5 +11,5 @@ ASmallCoinItem::ASmallCoinItem()
 
 void ASmallCoinItem::ActiveItem(AActor* Activator)
 {
-	DestroyItem();
+	Super::ActiveItem(Activator);
 }
